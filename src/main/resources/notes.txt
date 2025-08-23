@@ -1,0 +1,43 @@
+Thread - A lightweight unit of execution within a process allows to perform multiple tasks concurrently
+Process - An independent program with its own memory space
+
+Memory Management
+Processes have separate memory space
+Threads within the same process share memory, allowing efficient data sharing but requiring careful synchronization
+Resource Consumption
+Creating a new process is computationally expensive and requires significant system resources
+Threads are lightweight and can be created and destroyed quickly with minimum overhead
+Communication
+Processes communicate through complex mechanisms
+Threads can communicate directly by sharing memory
+
+Creating Threads -> ThreadsDemo.ThreadCreation
+extending the Thread class
+implementing Runnable interface
+
+Callable -> ThreadsDemo.CallableDemo
+unlike Runnable, Callable returns results and throws checked exceptions. Callable works with Future objects to retrieve
+results after task completion. It works with ExecutorService framework rather than directly extending Thread
+
+Runnable vs Callable
+Runnable cannot return result and throw exceptions while Callable can
+run() should be implemented for Runnable, call() should be implemented for Callable
+Runnable works with Thread whereas Callable works with ExecutorService and Future
+
+start() vs run() -> ThreadsDemo.RunVsStart
+directly calling run will not create a new thread, it will execute in the current thread
+also we cannot thread.start() more than once
+
+Thread safety
+refers to the code that functions correctly during simultaneous execution by multiple threads
+it can be achieved through
+synchronization
+immutable objects
+concurrent collections
+atomic variables
+
+sleep() vs wait()
+sleep() causes the current thread to pause for a specified time without realising locks
+wait() causes the current thread wait until another thread invokes notify() or notifyAll() on the same object, and it
+releases the lock on the object
+
