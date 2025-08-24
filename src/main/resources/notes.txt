@@ -133,3 +133,13 @@ notify(): The notify() method wakes up a single thread that is waiting on the ob
 is waiting, the scheduler chooses one arbitrarily
 notifyAll(): The notifyAll() method wakes up all threads that are waiting on the object’s monitor.
 
+Concurrent Collections
+ConcurrentHashMap - Thread safe implementation of HashMap
+CopyOnWriteArrayList - Thread safe implementation of ArrayList
+
+Compare and Swap
+CAS is a low-level atomic operation used to implement synchronization in multi-threaded programs without using locks.
+It’s widely used in lock-free and non-blocking algorithms.
+CAS works by comparing a memory value with an expected value, and if they match, swapping it with a new value — all as a
+single atomic CPU instruction.
+https://howtodoinjava.com/java/multi-threading/compare-and-swap-cas-algorithm/
