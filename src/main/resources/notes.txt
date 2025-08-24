@@ -63,3 +63,32 @@ Core size = 2 → first 2 tasks get threads immediately.
 Queue size = 2 → next 2 tasks go into queue.
 Max size = 4 → 2 more tasks can start new threads.
 If more tasks are submitted → rejected
+
+Core Executor Interfaces and Classes
+Executor: The base interface defining task execution
+Executor is the simplest form—just defines a execute(Runnable) method. You provide a task, and it decides how to run it
+ExecutorService: Extends Executor with lifecycle management
+ExecutorService allows advanced task handling with submit(), invokeAll(), shutdown(), and Future results for return
+values and tracking task completion. submit(Runnable), submit(Callable)
+ScheduledExecutorService: Adds task scheduling capabilities -> ThreadsDemo.ScheduledExecutorDemo
+Allows you to schedule tasks to run after a delay or at a fixed rate—ideal for repeated jobs like health checks or
+polling. schedule(Runnable/Callable, delay, TimeUnits)
+Executors: Factory class for creating executor instances
+
+Task Submission Methods
+execute(Runnable) Task runs asynchronously. No result is expected or tracked.
+Future<?> submit(Runnable/Callable) Returns a Future. You can block and get the result using future.get().
+invokeAll(Collection<? extends Callable<T>> tasks) Runs all tasks in parallel. Waits until all finish. You get a list of
+Futures.
+
+Lifecycle Management Methods
+ThreadsDemo.ShutDownVsShutDownNow
+shutdown - graceful shutdown, no new tasks are accepted, but already submitted tasks (in queue + running) will still
+complete.
+shutdownNoe - Immediate shutdown, Attempts to stop all actively executing tasks by interrupting threads. Discards all
+tasks waiting in the queue (returns them as a List<Runnable>).
+
+What happens if you don't explicitly shut down an ExecutorService?
+The executor's threads will continue running, preventing the JVM from shutting down normally (unless they're daemon
+threads). This can cause memory leaks and resource exhaustion. Always call shutdown() or shutdownNow() when done with an
+executor.
