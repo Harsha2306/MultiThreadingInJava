@@ -138,8 +138,44 @@ ConcurrentHashMap - Thread safe implementation of HashMap
 CopyOnWriteArrayList - Thread safe implementation of ArrayList
 
 Compare and Swap
-CAS is a low-level atomic operation used to implement synchronization in multi-threaded programs without using locks.
+CAS is a low-level atomic operation used to implement synchronization in multithreaded programs without using locks.
 It’s widely used in lock-free and non-blocking algorithms.
 CAS works by comparing a memory value with an expected value, and if they match, swapping it with a new value — all as a
 single atomic CPU instruction.
 https://howtodoinjava.com/java/multi-threading/compare-and-swap-cas-algorithm/
+
+Future and Completable Future in Java: Asynchronous Programming Essentials
+The Future interface, introduced in Java 5, represents the result of an asynchronous computation. It provides a way to
+check if the computation is complete, wait for its completion, and retrieve the result.
+Key Features of Future -> ThreadsDemo.FutureDemo
+submit() starts the task asynchronously.
+future.get() blocks until the task finishes and returns the result.
+get(long timeout, TimeUnit unit) if you want to avoid indefinite blocking as :
+future.get() blocks the current thread until the task completes — this could take forever if the task hangs.
+future.get(timeout, unit) adds a maximum wait time.
+If the result isn’t ready in that time, it throws a TimeoutException, and your thread can recover gracefully instead of
+hanging forever.
+isDone() tells if the task is finished.
+Limitations of Future in Java
+Future does not support chaining multiple tasks together. You cannot specify a dependent task that should execute once
+the Future completes, making it difficult to manage sequential asynchronous computations.
+There is no built-in mechanism to handle exceptions in the Future. If an exception occurs during execution, you must
+manually catch it using get(), which can make error handling cumbersome.
+
+CompletableFuture -> ThreadsDemo.CompletableFutureDemo
+CompletableFuture, introduced in Java 8, extends the Future interface and implements the CompletionStage interface. It
+addresses the limitations of Future and provides a rich set of methods for composing, combining, and handling
+asynchronous computations.
+Combining CompletableFutures -> ThreadsDemo.CompletableFutureCombiningDemo
+In situations where multiple asynchronous tasks are running in parallel, CompletableFuture makes it easy to combine
+their results using thenCombine. Additionally, you can wait for all tasks to complete or get the first completed result
+using allOf and anyOf.
+Exception Handling -> ThreadsDemo.CompletableFutureExceptionHandling
+CompletableFuture provides robust mechanisms for handling exceptions during asynchronous tasks. Use exceptionally to
+recover from errors or handle to manage both success and failure scenarios.
+
+Future vs CompletableFuture
+Result Retrieval os blocking in Future, blocking and non-blocking in CompletableFuture
+Exception Handling is limited in Future, Robust in CompletableFuture
+Combining results is not possible in Future
+Executor is required in Future, CompletableFuture uses ForkJoinPool by default
