@@ -41,3 +41,25 @@ sleep() causes the current thread to pause for a specified time without realisin
 wait() causes the current thread wait until another thread invokes notify() or notifyAll() on the same object, and it
 releases the lock on the object
 
+ThreadPools - ThreadsDemo.FixedThreadPoolDemo
+are managed collection of reusable threads designed to execute tasks concurrently
+Explanation from example
+Executors.newFixedThreadPool(3) creates a pool with 3 reusable threads.
+Five tasks are submitted. Since only 3 threads exist, the first 3 tasks start immediately.
+As tasks complete, the available threads pick up the remaining tasks.
+Threads are reused, avoiding the overhead of creating new threads for each task. After task completion, the thread
+returns to the pool (RUNNABLE state waiting for next task)
+The execution order may vary based on CPU scheduling.
+Pool Shutdown: During shutdown, threads complete their current tasks and are eventually terminated.
+
+Executors.newCachedThreadPool()
+Threads are created dynamically as needed, avoiding delays due to waiting.
+
+ThreadPoolExecutor
+It provides a thread pool implementation for executing tasks concurrently.
+It’s the backbone of most thread pools created via Executors factory methods (like Executors.newFixedThreadPool()).
+ThreadsDemo.ThreadPoolExecutorDemo
+Core size = 2 → first 2 tasks get threads immediately.
+Queue size = 2 → next 2 tasks go into queue.
+Max size = 4 → 2 more tasks can start new threads.
+If more tasks are submitted → rejected
