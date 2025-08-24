@@ -92,3 +92,35 @@ What happens if you don't explicitly shut down an ExecutorService?
 The executor's threads will continue running, preventing the JVM from shutting down normally (unless they're daemon
 threads). This can cause memory leaks and resource exhaustion. Always call shutdown() or shutdownNow() when done with an
 executor.
+
+Thread Synchronization in Java
+Thread synchronization is a critical concept in multithreaded programming that ensures multiple threads access shared
+resources in a controlled manner. Proper synchronization prevents data corruption, race conditions, and ensures thread
+safety in a concurrent environment.
+The synchronized keyword is used to control access to critical sections of code so that only one thread can execute the
+synchronized code at a time. This ensures that shared mutable data is not corrupted by concurrent modifications
+
+Synchronized Method -> ThreadsDemo.SynchronizedMethodDemo
+When you declare an entire method as synchronized, the lock is acquired on the object instance
+(or on the Class object for static methods) before the method is executed and released after it finishes
+This is useful when the whole method represents a critical section where no concurrent execution is desired. It is
+straightforward and reduces the chance of forgetting to protect part of the code
+
+Synchronized Block -> ThreadsDemo.SynchronizedBlockDemo
+A synchronized block allows you to specify a particular block of code to be synchronized, along with the object on which
+to acquire the lock
+The primary reason to choose a synchronized block over a synchronized method is when you have additional work in the
+method that doesn’t need to be synchronized. This allows concurrent threads to execute the non-critical sections without
+waiting for the lock
+
+volatile
+When a variable is declared volatile, its value is always read from and written to the main memory instead of a
+thread’s local cache.
+This means changes made by one thread are immediately visible to others.
+It doesn't guarantee Atomicity. Used in flags
+
+Atomic Variables -> ThreadsDemo.AtomicCounterDemo
+in Java—found in the java.util.concurrent.atomic package—are designed to support lock-free, thread-safe
+operations on single variables. You should use atomic variables when you need to perform simple operations
+(like incrementing, decrementing, or updating) on shared variables in a multithreaded environment. They are especially
+useful when the overhead of locking is undesirable and when the logic remains limited to single-step atomic operations
