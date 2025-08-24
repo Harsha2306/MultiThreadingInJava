@@ -124,3 +124,12 @@ in Java—found in the java.util.concurrent.atomic package—are designed to sup
 operations on single variables. You should use atomic variables when you need to perform simple operations
 (like incrementing, decrementing, or updating) on shared variables in a multithreaded environment. They are especially
 useful when the overhead of locking is undesirable and when the logic remains limited to single-step atomic operations
+
+Thread Communication in Java -> ThreadsDemo.ProducerConsumer
+is a fundamental concept in concurrent programming that allows multiple threads to coordinate and share data effectively
+wait(): When a thread calls the wait() method on an object, it releases the monitor it holds on that object and goes
+into a waiting state. For example, a consumer thread might wait for a producer to produce an item.
+notify(): The notify() method wakes up a single thread that is waiting on the object’s monitor. If more than one thread
+is waiting, the scheduler chooses one arbitrarily
+notifyAll(): The notifyAll() method wakes up all threads that are waiting on the object’s monitor.
+
