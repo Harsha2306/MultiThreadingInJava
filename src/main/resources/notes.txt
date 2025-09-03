@@ -85,7 +85,7 @@ Lifecycle Management Methods
 ThreadsDemo.ShutDownVsShutDownNow
 shutdown - graceful shutdown, no new tasks are accepted, but already submitted tasks (in queue + running) will still
 complete.
-shutdownNoe - Immediate shutdown, Attempts to stop all actively executing tasks by interrupting threads. Discards all
+shutdownNow - Immediate shutdown, Attempts to stop all actively executing tasks by interrupting threads. Discards all
 tasks waiting in the queue (returns them as a List<Runnable>).
 
 What happens if you don't explicitly shut down an ExecutorService?
@@ -175,7 +175,7 @@ CompletableFuture provides robust mechanisms for handling exceptions during asyn
 recover from errors or handle to manage both success and failure scenarios.
 
 Future vs CompletableFuture
-Result Retrieval os blocking in Future, blocking and non-blocking in CompletableFuture
+Result Retrieval is blocking in Future, blocking and non-blocking in CompletableFuture
 Exception Handling is limited in Future, Robust in CompletableFuture
 Combining results is not possible in Future
 Executor is required in Future, CompletableFuture uses ForkJoinPool by default
